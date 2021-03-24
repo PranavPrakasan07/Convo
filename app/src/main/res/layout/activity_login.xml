@@ -7,7 +7,6 @@
     tools:context=".LoginActivity">
 
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/animation_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,30 +14,31 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:scaleType="fitCenter"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="tick-animation.json"
-        app:lottie_loop="true"
-        app:lottie_url="https://assets10.lottiefiles.com/packages/lf20_bkPJSr.json" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:scaleType="fitCenter"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="tick-animation.json"
+            app:lottie_loop="false"
+            app:lottie_url="https://assets10.lottiefiles.com/packages/lf20_bkPJSr.json" />
 
     </LinearLayout>
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_login_bg" />
@@ -62,9 +62,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="32dp"
             android:fontFamily="@font/open_sans_semibold"
             android:text="Login"
-            android:layout_marginBottom="32dp"
             android:textColor="#121212"
             android:textSize="36sp" />
 
@@ -73,28 +73,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:ems="10"
             android:layout_marginBottom="16dp"
+            android:ems="10"
             android:fontFamily="@font/open_sans"
             android:hint="Email"
-            android:textSize="16sp"
             android:inputType="textEmailAddress"
             android:textColor="#121212"
-            android:textColorHint="#80121212" />
+            android:textColorHint="#80121212"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/password_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:ems="10"
-            android:textSize="16sp"
             android:layout_marginBottom="32dp"
+            android:ems="10"
             android:fontFamily="@font/open_sans"
             android:hint="Password"
             android:inputType="textPassword"
             android:textColor="#121212"
-            android:textColorHint="#80121212" />
+            android:textColorHint="#80121212"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/login_button"
@@ -104,9 +104,9 @@
             android:layout_marginBottom="32dp"
             android:background="@drawable/green_fill"
             android:fontFamily="@font/open_sans_semibold"
-            android:textSize="16sp"
             android:text="Login"
-            android:textColor="#121212" />
+            android:textColor="#121212"
+            android:textSize="16sp" />
 
         <View
             android:id="@+id/divider"
@@ -120,9 +120,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/open_sans_semibold"
             android:text="Login with Google"
-            android:layout_marginBottom="8dp"
             android:textColor="#121212"
             android:textSize="14sp" />
 
@@ -131,11 +131,14 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:scaleType="fitCenter"
             android:background="@drawable/ic_google_icon"
+            android:scaleType="fitCenter"
             android:text="Google" />
 
-
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

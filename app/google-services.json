@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "105879613569",
+    "project_id": "convo-c951f",
+    "storage_bucket": "convo-c951f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105879613569:android:5e9d917daa6601cd641d80",
+        "android_client_info": {
+          "package_name": "com.example.convo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105879613569-3vfac2pl8uhp5kus4be5getbb9jdgh00.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs8l9YRRmDxcSr7pc7qg2SeZzEVYNaoG8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105879613569-3vfac2pl8uhp5kus4be5getbb9jdgh00.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
