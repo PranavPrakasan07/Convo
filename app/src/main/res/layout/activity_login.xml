@@ -6,24 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/animation_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:scaleType="fitCenter"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:scaleType="fitCenter"
         app:lottie_autoPlay="true"
         app:lottie_fileName="tick-animation.json"
-        app:lottie_loop="false"
+        app:lottie_loop="true"
         app:lottie_url="https://assets10.lottiefiles.com/packages/lf20_bkPJSr.json" />
+
+    </LinearLayout>
 
     <ImageView
         android:visibility="gone"
