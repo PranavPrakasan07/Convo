@@ -28,8 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -93,6 +92,27 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email_text = email.getText().toString();
+                String password_text = password.getText().toString();
+
+                if (email_text.equals("")) {
+                    Toast.makeText(LoginActivity.this, "Fill in your email", Toast.LENGTH_SHORT).show();
+                }
+                else if (password_text.equals("")) {
+                    Toast.makeText(LoginActivity.this, "Fill in your password", Toast.LENGTH_SHORT).show();
+                }
+                else if (password_text.length() < 6) {
+                    Toast.makeText(LoginActivity.this, "Password is too short!", Toast.LENGTH_SHORT).show();
+                } else {
+                    verify_user(email_text, password_text);
+                }
+
+            }
+        });
+
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -116,26 +136,10 @@ public class LoginActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
             }
         });
 
-        login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "Clicked!", Toast.LENGTH_SHORT).show();
-                animation_view.setVisibility(View.VISIBLE);
-                login_layout.setVisibility(View.GONE);
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(new Intent(getApplicationContext(), Home.class));
-                    }
-                }, 4000);
-
-            }
-        });
 
 //        mAuth.signInWithCustomToken(mCustomToken)
 //                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -157,6 +161,27 @@ public class LoginActivity extends AppCompatActivity {
 //                });
     }
 
+    private void verify_user(String email_text, String password_text) {
+
+        mAuth.signInWithEmailAndPassword(email_text, password_text).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Logged in Successfully", Toast.LENGTH_SHORT).show();
+
+
+                    startActivity(new Intent(getApplicationContext(), Home.class));
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error ! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
+
+    }
+
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -173,6 +198,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("TAG", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
+                            Toast.makeText(LoginActivity.this, "Clicked!", Toast.LENGTH_SHORT).show();
                             animation_view.setVisibility(View.VISIBLE);
                             login_layout.setVisibility(View.GONE);
                             Handler handler = new Handler();
@@ -181,7 +207,7 @@ public class LoginActivity extends AppCompatActivity {
                                 public void run() {
                                     startActivity(new Intent(getApplicationContext(), Home.class));
                                 }
-                            }, 3500);
+                            }, 4000);
 
                         } else {
                             // If sign in fails, display a message to the user.
