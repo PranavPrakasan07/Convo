@@ -126,17 +126,9 @@
             android:textColor="#121212"
             android:textSize="14sp" />
 
-        <ImageButton
-            android:id="@+id/button2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/ic_google_icon"
-            android:scaleType="fitCenter"
-            android:text="Google" />
-
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
+            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

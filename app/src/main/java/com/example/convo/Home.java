@@ -1,16 +1,19 @@
 package com.example.convo;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class Home extends AppCompatActivity {
 
@@ -23,25 +26,34 @@ public class Home extends AppCompatActivity {
 
         logout = findViewById(R.id.logout_button);
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == R.id.logout_button) {
-                    signOut();
-                    // ...
-                }
-            }
-        });
-
+        logout.setVisibility(View.GONE);
     }
 
     private void signOut() {
-        LoginActivity.mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    }
-                });
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+    }
+
+    public void show_menu(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.profile_menu, popup.getMenu());
+        popup.show();
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+                if ("Profile".equals(menuItem.toString())) {
+                    Toast.makeText(Home.this, "Profile clicked", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Home.this, Objects.requireNonNull(LoginActivity.mAuth.getCurrentUser()).getEmail() + LoginActivity.mAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
+                }else if("Logout".equals(menuItem.toString())){
+                    Toast.makeText(Home.this, "Logout clicked", Toast.LENGTH_SHORT).show();
+                    signOut();
+                }
+
+                return false;
+            }
+        });
     }
 }
