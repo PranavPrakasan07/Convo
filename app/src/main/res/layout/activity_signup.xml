@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".SignupActivity">
 
     <LinearLayout
         android:id="@+id/animation_layout"
@@ -44,7 +44,7 @@
         app:srcCompat="@drawable/ic_login_bg" />
 
     <LinearLayout
-        android:id="@+id/login_layout"
+        android:id="@+id/register_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -58,13 +58,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/login_header"
+            android:id="@+id/register_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="32dp"
             android:fontFamily="@font/open_sans_semibold"
-            android:text="Login"
+            android:text="Register"
             android:textColor="#121212"
             android:textSize="36sp" />
 
@@ -97,14 +97,14 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/register_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="32dp"
             android:background="@drawable/teal_green_fill"
             android:fontFamily="@font/open_sans_semibold"
-            android:text="Login"
+            android:text="Register"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textColor="#121212"
@@ -124,7 +124,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/open_sans_semibold"
-            android:text="Login with Google"
+            android:text="Sign up with Google"
             android:textColor="#121212"
             android:textSize="14sp" />
 
@@ -135,13 +135,13 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/register_button"
+            android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/open_sans_semibold"
-            android:text="New here? Register"
+            android:text="Already have an account? Login"
             android:textColor="#80121212"
             android:textSize="14sp" />
 

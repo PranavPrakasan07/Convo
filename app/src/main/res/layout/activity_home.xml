@@ -7,7 +7,6 @@
     tools:context=".Home">
 
     <Button
-        android:visibility="gone"
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,6 +14,7 @@
         android:layout_marginTop="268dp"
         android:layout_marginEnd="137dp"
         android:text="Button"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,6 +26,7 @@
         android:background="#FFFFFF"
         android:minHeight="?attr/actionBarSize"
         android:padding="16dp"
+        android:backgroundTint="#128C7E"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,35 +44,77 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="Chats"
                 android:gravity="center_vertical|center_horizontal"
-                android:textColor="#121212"
-                android:textSize="36sp" />
+                android:text="Chats"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
 
             <ImageButton
                 android:id="@+id/imageButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="8dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="16dp"
                 android:layout_toStartOf="@+id/imageButton2"
-                android:background="#FFFFFF"
-                android:padding="8dp"
+                android:background="#00FFFFFF"
+                android:padding="2dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+                android:src="@drawable/ic_baseline_search_24" />
 
             <ImageButton
                 android:id="@+id/imageButton2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_alignParentEnd="true"
-                android:background="#FFFFFF"
-                android:scaleType="fitCenter"
-                android:layout_margin="4dp"
+                android:background="#00FFFFFF"
                 android:onClick="show_menu"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_baseline_account_circle_24" />
 
         </RelativeLayout>
+
     </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:background="@drawable/teal_green_fill"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/chats_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/image_round"
+            android:fontFamily="@font/open_sans_semibold"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:text="Chats"
+            android:textColor="#128C7E"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/calls_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:fontFamily="@font/open_sans_semibold"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:text="Calls"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

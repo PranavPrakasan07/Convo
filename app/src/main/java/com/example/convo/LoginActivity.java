@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -27,6 +28,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 1;
@@ -36,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
     LinearLayout animation_view, login_layout;
 
     public static FirebaseAuth mAuth;
+
+    TextView register;
 
     GoogleSignInClient mGoogleSignInClient;
 
@@ -78,6 +84,8 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.email_field);
         password = findViewById(R.id.password_field);
 
+        register = findViewById(R.id.register_button);
+
         animation_view = findViewById(R.id.animation_layout);
         login_layout = findViewById(R.id.login_layout);
 
@@ -105,6 +113,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
+            }
+        });
+
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,6 +136,25 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+//        mAuth.signInWithCustomToken(mCustomToken)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            // Sign in success, update UI with the signed-in user's information
+//                            Log.d("TAG", "signInWithCustomToken:success");
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//                            updateUI(user);
+//                        } else {
+//                            // If sign in fails, display a message to the user.
+//                            Log.w(TAG, "signInWithCustomToken:failure", task.getException());
+//                            Toast.makeText(CustomAuthActivity.this, "Authentication failed.",
+//                                    Toast.LENGTH_SHORT).show();
+//                            updateUI(null);
+//                        }
+//                    }
+//                });
     }
 
     private void signIn() {
@@ -138,7 +172,17 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(getApplicationContext(), Home.class));
+
+                            animation_view.setVisibility(View.VISIBLE);
+                            login_layout.setVisibility(View.GONE);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    startActivity(new Intent(getApplicationContext(), Home.class));
+                                }
+                            }, 3500);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
