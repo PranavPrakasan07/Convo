@@ -29,6 +29,24 @@ public class RegisterActivity extends AppCompatActivity {
     Button register_button;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        try {
+            Intent intent = getIntent();
+
+            String email_text = intent.getStringExtra("email");
+            String password_text = intent.getStringExtra("password");
+
+            email.setText(email_text);
+            password.setText(password_text);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
@@ -39,21 +57,21 @@ public class RegisterActivity extends AppCompatActivity {
 
         register_button = findViewById(R.id.register_button);
 
-        ActionCodeSettings actionCodeSettings =
-                ActionCodeSettings.newBuilder()
-                        // URL you want to redirect back to. The domain (www.example.com) for this
-                        // URL must be whitelisted in the Firebase Console.
-                        .setUrl("https://www.example.com/finishSignUp?cartId=1234")
-                        // This must be true
-                        .setHandleCodeInApp(true)
-                        .setIOSBundleId("com.example.ios")
-                        .setAndroidPackageName(
-                                "com.example.android",
-                                true, /* installIfNotAvailable */
-                                "12"    /* minimumVersion */)
-                        .build();
+//        ActionCodeSettings actionCodeSettings =
+//                ActionCodeSettings.newBuilder()
+//                        // URL you want to redirect back to. The domain (www.example.com) for this
+//                        // URL must be whitelisted in the Firebase Console.
+//                        .setUrl("https://www.example.com/finishSignUp?cartId=1234")
+//                        // This must be true
+//                        .setHandleCodeInApp(true)
+//                        .setIOSBundleId("com.example.ios")
+//                        .setAndroidPackageName(
+//                                "com.example.android",
+//                                true, /* installIfNotAvailable */
+//                                "12"    /* minimumVersion */)
+//                        .build();
 
-        if(LoginActivity.mAuth.getCurrentUser() != null){
+        if (LoginActivity.mAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), Home.class));
             finish();
         }
@@ -64,16 +82,13 @@ public class RegisterActivity extends AppCompatActivity {
                 String email_text = email.getText().toString();
                 String password_text = password.getText().toString();
 
-                if (email_text.equals("")){
+                if (email_text.equals("")) {
                     Toast.makeText(RegisterActivity.this, "Fill in your email", Toast.LENGTH_SHORT).show();
-                }
-                else if (password_text.equals("")){
+                } else if (password_text.equals("")) {
                     Toast.makeText(RegisterActivity.this, "Fill in your password", Toast.LENGTH_SHORT).show();
-                }
-                else if (password_text.length() < 6){
+                } else if (password_text.length() < 6) {
                     Toast.makeText(RegisterActivity.this, "Password is too short!", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     createAccount(email_text, password_text);
                 }
 
@@ -86,14 +101,12 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
         });
-
-
     }
 
     private void createAccount(String email_text, String password_text) {
 
 
-        LoginActivity.mAuth.createUserWithEmailAndPassword(email_text,password_text).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        LoginActivity.mAuth.createUserWithEmailAndPassword(email_text, password_text).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -110,10 +123,10 @@ public class RegisterActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterActivity.this, "Please try again!", Toast.LENGTH_SHORT).show();
                             Log.d("TAG", "onFailure: Email not sent " + e.getMessage());
                         }
                     });
-
                 }
             }
         });
